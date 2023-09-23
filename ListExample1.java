@@ -1,22 +1,42 @@
-import java.awt.*;    
+import javax.swing.*;  
+import java.awt.event.*;  
 public class ListExample1  
-{     
-     ListExample1() {    
-        Frame f = new Frame();     
-        List l1 = new List(5);    
-        l1.setBounds(100, 100, 75, 75);    
-        l1.add("Item 1");    
-        l1.add("Item 2");    
-        l1.add("Item 3");    
-        l1.add("Item 4");    
-        l1.add("Item 5");    
-        f.add(l1);   
-        f.setSize(400, 400);    
-        f.setLayout(null);    
-        f.setVisible(true);    
-     }    
-public static void main(String args[])    
-{    
-   new ListExample1();    
-}    
-}    
+{  
+     ListExample1(){  
+        JFrame f= new JFrame();  
+        final JLabel label = new JLabel();          
+        label.setSize(500,100);  
+        JButton b=new JButton("Show");  
+        b.setBounds(200,150,80,30);  
+        final DefaultListModel<String> l1 = new DefaultListModel<>();  
+          l1.addElement("C");  
+          l1.addElement("C++");  
+          l1.addElement("Java");  
+          l1.addElement("PHP");  
+          final JList<String> list1 = new JList<>(l1);  
+          list1.setBounds(100,100, 75,75);  
+          DefaultListModel<String> l2 = new DefaultListModel<>();  
+          l2.addElement("Turbo C++");  
+          l2.addElement("Struts");  
+          l2.addElement("Spring");  
+          l2.addElement("YII");  
+          final JList<String> list2 = new JList<>(l2);  
+          list2.setBounds(100,200, 75,75);  
+          f.add(list1); f.add(list2); f.add(b); f.add(label);  
+          f.setSize(450,450);  
+          f.setLayout(null);  
+          f.setVisible(true);  
+          b.addActionListener(new ActionListener() {  
+              public void actionPerformed(ActionEvent e) {   
+                 String data = "";  
+                 if (list1.getSelectedIndex() != -1) {                       
+                    data = "Programming language Selected: " + list1.getSelectedValue();   
+                    label.setText(data);  }  
+                 if(list2.getSelectedIndex() != -1){  
+                    data += ", FrameWork Selected: ";  
+                    for(Object frame :list2.getSelectedValues()){  
+                       data += frame + " ";     }  }  
+                 label.setText(data);   }   });    }  
+public static void main(String args[])  
+    {  
+   new ListExample1();  }}  
